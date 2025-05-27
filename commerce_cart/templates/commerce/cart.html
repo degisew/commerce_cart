@@ -1,0 +1,93 @@
+{% extends "_base.html" %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Your Cart</h2>
+
+  {% if messages %} {% for message in messages %}
+  <div
+    class="alert alert-{{ message.tags }} alert-dismissible fade show"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>${{ item.product.price }}</td>
+            <td style="width: 100px">
+              <input
+                type="number"
+                name="quantity_{{ item.product.id }}"
+                value="{{ item.quantity }}"
+                class="form-control"
+                min="0"
+              />
+            </td>
+            <td>${{ item.total_price }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="3" class="text-end"><strong>Total</strong></td>
+            <td><strong>${{ total }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-success">Buy</button>
+    </div>
+  </form>
+</div>
+{% endblock %} {% comment %} {% extends "_base.html" %} {% block title %}Your
+Cart{% endblock %} {% block content %}
+<h2 class="mb-4">Shopping Cart</h2>
+
+{% if items %}
+<div class="list-group">
+  {% for item in items %}
+  <div
+    class="list-group-item d-flex justify-content-between align-items-center"
+  >
+    <div class="d-flex align-items-center">
+      <img
+        src="{{ item.product.image_url }}"
+        alt="{{ item.product.name }}"
+        class="img-thumbnail me-3"
+        style="width: 80px; height: 80px"
+      />
+      <div>
+        <h5 class="mb-1">{{ item.product.name }}</h5>
+        <small class="text-muted"
+          >Price: ${{ item.product.price }} | Qty: {{ item.quantity }}</small
+        >
+      </div>
+    </div>
+    <div class="text-end"><strong>${{ item.total_price }}</strong><br /></div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<p class="text-muted">Your cart is empty.</p>
+{% endif %} {% endblock %} {% endcomment %}
