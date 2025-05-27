@@ -18,7 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 import debug_toolbar
 
+from commerce_cart.commerce.views import HomeView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", HomeView.as_view(), name="home"),
     path('__debug__/', include(debug_toolbar.urls)),
+    path("commerce/", include('commerce_cart.commerce.urls'))
 ]
