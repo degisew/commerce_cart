@@ -2,7 +2,6 @@ import re
 
 # import phonenumbers
 from django.utils.translation import gettext as _
-from rest_framework import serializers
 
 
 # def validate_phone_number(phone_number, region="ET"):
