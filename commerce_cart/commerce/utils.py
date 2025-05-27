@@ -1,8 +1,7 @@
-from decimal import Decimal
 from commerce_cart.commerce.models import Product
 
 
-class Cart:
+class CartMixin:
     def __init__(self, request):
         self.session = request.session
         cart = self.session.get('cart')

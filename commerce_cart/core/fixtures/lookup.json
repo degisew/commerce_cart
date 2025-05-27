@@ -1,0 +1,56 @@
+[
+  {
+    "model": "core.datalookup",
+    "pk": "071eade2-ed71-4ba2-88c8-f628cc829450",
+    "fields": {
+      "created_at": "2025-05-27T09:12:53.522Z",
+      "updated_at": "2025-05-27T09:12:53.522Z",
+      "deleted_at": null,
+      "type": "order_status",
+      "name": "COMPLETED",
+      "value": "order_status_completed",
+      "description": "A status for Completed Order.",
+      "category": "COMMERCE",
+      "index": 1,
+      "is_default": false,
+      "is_active": false,
+      "remark": ""
+    }
+  },
+  {
+    "model": "core.datalookup",
+    "pk": "07f6fdf0-bb53-4dec-a5aa-b4f455d6122e",
+    "fields": {
+      "created_at": "2025-05-27T09:12:16.799Z",
+      "updated_at": "2025-05-27T09:12:16.799Z",
+      "deleted_at": null,
+      "type": "order_status",
+      "name": "PENDING",
+      "value": "order_status_pending",
+      "description": "A status for Pending Order.",
+      "category": "COMMERCE",
+      "index": 0,
+      "is_default": true,
+      "is_active": false,
+      "remark": ""
+    }
+  },
+  {
+    "model": "core.datalookup",
+    "pk": "44059048-0ac9-406e-bea9-d5557d5e711c",
+    "fields": {
+      "created_at": "2025-05-27T09:13:33.611Z",
+      "updated_at": "2025-05-27T09:13:33.611Z",
+      "deleted_at": null,
+      "type": "order_status",
+      "name": "CANCELLED",
+      "value": "order_status_cancelled",
+      "description": "A status for cancelled Order.",
+      "category": "COMMERCE",
+      "index": 2,
+      "is_default": false,
+      "is_active": false,
+      "remark": ""
+    }
+  }
+]

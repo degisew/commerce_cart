@@ -26,6 +26,12 @@ class Product(AbstractBaseModel):
         verbose_name_plural = "Products"
         ordering = ['name']
 
+    def reduce_stock(self, quantity):
+        if quantity > self.quantity:
+            raise ValueError(f"Cannot reduce stock below zero for {self.name}")
+        self.quantity -= quantity
+        self.save()
+
     def __str__(self) -> str:
         return f"{self.name} (${self.price})"
 
@@ -125,7 +131,7 @@ class Order(AbstractBaseModel):
         ordering = ['-created_at']
 
     def __str__(self) -> str:
-        return f"Order #{self.id} - ${self.total_price:.2f}"
+        return f"Order {self.code}"
 
 
 class OrderItem(AbstractBaseModel):

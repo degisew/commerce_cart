@@ -2,18 +2,17 @@
 {% block title %}Products{% endblock %}
 {% block content %}
 
-<h2>Products</h2>
+<h2>List of Available Products</h2>
 <div class="row">
   {% for product in products %}
     <div class="col-md-4 mb-4">
       <div class="card h-100">
-        <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">${{ product.price }}</p>
-          <form method="post" action="{% url 'add_to_cart' product.id %}">
+          <p class="card-text"><b>AED</b> {{ product.price }} / <b>Kg</b></p>
+          <form method="post" action="#">
             {% csrf_token %}
-            <button class="btn btn-primary">Add to Cart</button>
+            <button class="btn btn-primary disabled">Add to Cart</button>
           </form>
         </div>
       </div>

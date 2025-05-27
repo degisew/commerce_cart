@@ -32,17 +32,6 @@ class CartAdmin(admin.ModelAdmin):
     ordering = ['-created_at']
 
 
-# @admin.register(CartItem)
-# class CartItemAdmin(admin.ModelAdmin):
-#     """
-#     Admin configuration for CartItem model.
-#     """
-#     list_display = ("product", "cart", "quantity", "created_at")
-#     exclude = ("deleted_at",)
-#     search_fields = ("product__name", "cart__session_key")
-#     list_filter = ("created_at",)
-
-
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
@@ -52,7 +41,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'created_at', 'total_price')
+    list_display = ('code', 'total_price', 'status', 'created_at')
     exclude = ("deleted_at",)
     inlines = [OrderItemInline]
     readonly_fields = ('created_at', 'total_price')

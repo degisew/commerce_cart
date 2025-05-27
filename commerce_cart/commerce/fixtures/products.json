@@ -1,0 +1,38 @@
+[
+  {
+    "model": "commerce.product",
+    "pk": "0ec1c08c-9e80-4323-9963-40942ba3ef22",
+    "fields": {
+      "created_at": "2025-05-26T18:41:35.718Z",
+      "updated_at": "2025-05-27T10:27:58.462Z",
+      "deleted_at": null,
+      "name": "carrot",
+      "price": "4.00",
+      "quantity": 1
+    }
+  },
+  {
+    "model": "commerce.product",
+    "pk": "5a3aa722-6777-4dc8-8669-edbc72d2ae1f",
+    "fields": {
+      "created_at": "2025-05-26T18:41:19.086Z",
+      "updated_at": "2025-05-27T10:27:58.471Z",
+      "deleted_at": null,
+      "name": "potato",
+      "price": "5.00",
+      "quantity": 2
+    }
+  },
+  {
+    "model": "commerce.product",
+    "pk": "8cca6feb-6e2d-472a-9ecf-3991b8c8c6eb",
+    "fields": {
+      "created_at": "2025-05-26T18:41:49.049Z",
+      "updated_at": "2025-05-27T10:27:58.468Z",
+      "deleted_at": null,
+      "name": "onion",
+      "price": "2.00",
+      "quantity": 2
+    }
+  }
+]

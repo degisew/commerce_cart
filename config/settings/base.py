@@ -15,7 +15,7 @@ from environ import Env
 
 env = Env()
 env.read_env()
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 APPS_DIR = BASE_DIR / "commerce_cart"
@@ -78,16 +78,10 @@ DJANGO_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
-    # "django.contrib.sites",
+    "django.contrib.staticfiles"
 ]
 
-THIRD_PARTY_APPS = [
-    # "crispy_forms",
-    # "crispy_bootstrap5",
-    # "allauth",
-    # "allauth.account",
-]
+THIRD_PARTY_APPS = []
 
 INSTALLED_APPS = CUSTOM_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
