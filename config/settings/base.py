@@ -27,8 +27,6 @@ APPS_DIR = BASE_DIR / "commerce_cart"
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
 # '0.0.0.0' is for docker
@@ -152,19 +150,11 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
-# # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
-# STATICFILES_FINDERS = [
-#     "django.contrib.staticfiles.finders.FileSystemFinder",
-#     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-# ]
-
 
 # Media files
 MEDIA_URL = "media/"
 
 MEDIA_ROOT = BASE_DIR / "mediafiles"
-
-# DATALOOKUP_MODEL = "core.DataLookup"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
