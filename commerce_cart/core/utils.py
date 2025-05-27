@@ -1,9 +1,5 @@
-from datetime import datetime
 import hashlib
-
-
-def generate_password(full_name):
-    return "".join([full_name, "@1234"])
+from datetime import datetime
 
 
 def generate_unique_code(
