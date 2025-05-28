@@ -6,3 +6,4 @@ packaging==25.0
 pluggy==1.6.0
 sqlparse==0.5.3
 psycopg2-binary==2.9.10
+pillow==11.2.1
