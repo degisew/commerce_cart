@@ -10,8 +10,7 @@ class OrderService:
     def get_order_status() -> DataLookup:
         try:
             order_status = DataLookup.objects.get(
-                type=ORDER_STATUS_TYPE,
-                value=OrderStatus.PENDING.value
+                type=ORDER_STATUS_TYPE, value=OrderStatus.PENDING.value
             )
             return order_status
 
@@ -24,21 +23,18 @@ class OrderService:
         with transaction.atomic():
             order = Order.objects.create(
                 session_key=session_key,
-                code=generate_unique_code(
-                    prefix="ORD",
-                    unique_identifier=session_key
-                ),
+                code=generate_unique_code(prefix="ORD", unique_identifier=session_key),
                 total_price=cart.get_total_price(),
-                status=OrderService.get_order_status()
+                status=OrderService.get_order_status(),
             )
             for item in cart:
-                product: Product = item['product']
-                quantity = item['quantity']
+                product: Product = item["product"]
+                quantity = item["quantity"]
 
                 OrderItem.objects.create(
                     order=order,
                     product_name=product.name,
                     quantity=quantity,
-                    price_at_purchase=product.price
+                    price_at_purchase=product.price,
                 )
                 product.reduce_stock(quantity)

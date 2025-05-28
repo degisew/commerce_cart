@@ -8,16 +8,12 @@ from commerce_cart.commerce.enums import ORDER_STATUS_TYPE, OrderStatus
 
 @pytest.mark.django_db
 def test_order_submission_deducts_inventory(client: Client) -> None:
-
-    DataLookup.objects.create(
-        type=ORDER_STATUS_TYPE,
-        value=OrderStatus.PENDING.value
-    )
+    DataLookup.objects.create(type=ORDER_STATUS_TYPE, value=OrderStatus.PENDING.value)
     product = Product.objects.create(name="Apple", price=10, quantity=5)
 
     class FakeCart:
         def __iter__(self):
-            yield {'product': product, 'quantity': 2}
+            yield {"product": product, "quantity": 2}
 
         def get_total_price(self):
             return 20

@@ -15,7 +15,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()
+        context["products"] = Product.objects.all()
         return context
 
 
@@ -29,10 +29,11 @@ class CartView(View):
             for p in first_three:
                 cart.add(p.id, quantity=1)
 
-        return render(request, 'commerce/cart.html', {
-            'cart_items': list(cart),
-            'total': cart.get_total_price()
-        })
+        return render(
+            request,
+            "commerce/cart.html",
+            {"cart_items": list(cart), "total": cart.get_total_price()},
+        )
 
     def post(self, request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         cart = CartMixin(request)
@@ -50,28 +51,27 @@ class CartView(View):
 
                 if requested_qty > product.quantity:
                     if product.quantity == 0:
-                        errors.append(
-                            f"Sorry, {product.name} is out of stock.")
+                        errors.append(f"Sorry, {product.name} is out of stock.")
                     else:
                         errors.append(
-                            f"Sorry, only {product.quantity} {product.name} left.")
+                            f"Sorry, only {product.quantity} {product.name} left."
+                        )
 
         if errors:
             for err in errors:
                 messages.error(request, err)
         else:
-
             OrderService.create_order(
-                session_key=request.session.session_key, cart=cart)
-            messages.success(
-                request, "Your order has been placed successfully.")
+                session_key=request.session.session_key, cart=cart
+            )
+            messages.success(request, "Your order has been placed successfully.")
             cart.clear()
 
-        return redirect('cart')
+        return redirect("cart")
 
 
 class OrderView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
         session_key = request.session.session_key
         items = Order.objects.filter(session_key=session_key)
-        return render(request, 'commerce/orders.html', {'items': items})
+        return render(request, "commerce/orders.html", {"items": items})
