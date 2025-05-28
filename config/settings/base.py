@@ -36,7 +36,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 ROOT_URLCONF = "config.urls"
 
-AUTH_USER_MODEL = "account.User"
+# AUTH_USER_MODEL = "account.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -64,7 +64,7 @@ DATABASES = {
 
 
 # Application definition
-CUSTOM_APPS = ["commerce_cart.core", "commerce_cart.account", "commerce_cart.commerce"]
+CUSTOM_APPS = ["commerce_cart.core", "commerce_cart.commerce"]
 
 DJANGO_APPS = [
     "django.contrib.admin",
