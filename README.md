@@ -103,7 +103,7 @@ Click **Save** to add the server, and you should now be able to manage the `comm
 ├── config/               # Project Configurations
 │     └── settings/       # Project settings for dev,test, and prod environment
 ├── docker
-│     └── dev/          
+│     └── dev/
 │          └── Dockerfile # Django API Dockerfile for development environment
 ├── docs/                 # Documentation files
 ├── .env                  # Environment variables (you will create this)
