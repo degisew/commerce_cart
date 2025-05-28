@@ -5,7 +5,7 @@ from config.settings.base import INSTALLED_APPS, MIDDLEWARE, ALLOWED_HOSTS
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS += ["127.0.0.1", "localhost"]
 
 INSTALLED_APPS += ["debug_toolbar"]
 
@@ -17,7 +17,7 @@ def show_toolbar(request):
 
 
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    "SHOW_TOOLBAR_CALLBACK": show_toolbar,
     "DISABLE_PANELS": [
         "debug_toolbar.panels.redirects.RedirectsPanel",
         # Disable profiling panel due to an issue with Python 3.12:
