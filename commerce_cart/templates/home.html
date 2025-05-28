@@ -1,23 +1,38 @@
 {% extends "_base.html" %}
-{% block title %}Products{% endblock %}
+{% block title %}
+    Products
+{% endblock title %}
 {% block content %}
-
-<h2>List of Available Products</h2>
-<div class="row">
-  {% for product in products %}
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text"><b>AED</b> {{ product.price }} / <b>Kg</b></p>
-          <form method="post" action="#">
-            {% csrf_token %}
-            <button class="btn btn-primary disabled">Add to Cart</button>
-          </form>
-        </div>
-      </div>
+    <h2>List of Available Products</h2>
+    <div class="toast-container" id="toast-container"></div>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}"
+                             class="card-img-top"
+                             alt="{{ product.name }}"
+                             height="200px"
+                             width="100%" />
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">
+                            <b>AED</b> {{ product.price }} / <b>Kg</b>
+                        </p>
+                        <form class="add-to-cart-form" data-product-id="{{ product.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}" />
+                            <button type="submit"
+                                    class="add__to__cart__btn btn btn-primary"
+                                    data-product-id="{{ product.id }}">
+                                <span class="btn-text">Add to Cart</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-  {% endfor %}
-</div>
-
-{% endblock %}
+{% endblock content %}

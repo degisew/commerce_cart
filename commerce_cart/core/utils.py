@@ -19,16 +19,10 @@ def generate_unique_code(
     Returns:
         str: A generated unique code.
     """
-    timestamp = (
-        datetime.now().strftime("%Y%m%d%H%M%S") if include_timestamp else ""
-    )
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S") if include_timestamp else ""
     base_string = (
-        f"{unique_identifier}-{timestamp}"
-        if timestamp
-        else str(unique_identifier)
+        f"{unique_identifier}-{timestamp}" if timestamp else str(unique_identifier)
     )
-    hashed_part = (
-        hashlib.md5(base_string.encode()).hexdigest()[:length].upper()
-    )
+    hashed_part = hashlib.md5(base_string.encode()).hexdigest()[:length].upper()
 
     return f"{prefix}-{hashed_part}"

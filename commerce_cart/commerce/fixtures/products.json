@@ -1,38 +1,41 @@
 [
   {
     "model": "commerce.product",
-    "pk": "0ec1c08c-9e80-4323-9963-40942ba3ef22",
+    "pk": "4d218b46-b8c1-4a5b-8900-ae7b42f8ee48",
     "fields": {
-      "created_at": "2025-05-26T18:41:35.718Z",
-      "updated_at": "2025-05-27T10:27:58.462Z",
+      "created_at": "2025-05-28T12:00:06.034Z",
+      "updated_at": "2025-05-28T12:19:06.000Z",
       "deleted_at": null,
-      "name": "carrot",
-      "price": "4.00",
-      "quantity": 1
-    }
-  },
-  {
-    "model": "commerce.product",
-    "pk": "5a3aa722-6777-4dc8-8669-edbc72d2ae1f",
-    "fields": {
-      "created_at": "2025-05-26T18:41:19.086Z",
-      "updated_at": "2025-05-27T10:27:58.471Z",
-      "deleted_at": null,
-      "name": "potato",
+      "name": "Potato",
       "price": "5.00",
-      "quantity": 2
+      "quantity": 1,
+      "image": "product_images/potato.jpeg"
     }
   },
   {
     "model": "commerce.product",
-    "pk": "8cca6feb-6e2d-472a-9ecf-3991b8c8c6eb",
+    "pk": "addc01bb-23ed-444d-a9aa-f04a316abf39",
     "fields": {
-      "created_at": "2025-05-26T18:41:49.049Z",
-      "updated_at": "2025-05-27T10:27:58.468Z",
+      "created_at": "2025-05-28T11:59:08.246Z",
+      "updated_at": "2025-05-28T12:19:05.995Z",
       "deleted_at": null,
-      "name": "onion",
+      "name": "Onion",
       "price": "2.00",
-      "quantity": 2
+      "quantity": 0,
+      "image": "product_images/onion.jpeg"
+    }
+  },
+  {
+    "model": "commerce.product",
+    "pk": "f3b94da2-4d2e-42ec-a75f-791c7fb4fa88",
+    "fields": {
+      "created_at": "2025-05-28T12:00:31.510Z",
+      "updated_at": "2025-05-28T12:19:05.989Z",
+      "deleted_at": null,
+      "name": "Carrot",
+      "price": "4.00",
+      "quantity": 0,
+      "image": "product_images/carot.jpeg"
     }
   }
 ]

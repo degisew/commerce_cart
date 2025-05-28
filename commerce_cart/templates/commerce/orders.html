@@ -1,42 +1,45 @@
-{% extends '_base.html' %} {% load static %} {% block content %}
-<div class="container mt-5">
-  <h2>Orders</h2>
-
-  {% if items %}
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped mt-4">
-      <thead class="table-dark">
-        <tr>
-          <th>Order Code</th>
-          <th>Items</th>
-          <th>Total Price</th>
-          <th>Ordered Date</th>
-          <th>Order Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in items %}
-        <tr>
-          <td>{{ order.code }}</td>
-          <td>
-            <ul>
-              {% for item in order.items.all %}
-              <li>
-                {{ item.product_name }} — {{ item.quantity }} <b>Kg </b> x <b>AED</b> {{ item.price_at_purchase }}
-              </li>
-              {% endfor %}
-            </ul>
-          </td>
-          <td><b>AED</b> {{ order.total_price|floatformat:2 }}</td>
-          <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
-          <td>{{ order.status|upper}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  {% else %}
-  <div class="alert alert-info mt-4">You have not placed any orders yet.</div>
-  {% endif %}
-</div>
-{% endblock %}
+{% extends "_base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <h2>Orders</h2>
+        {% if items %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped mt-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Order Code</th>
+                            <th>Items</th>
+                            <th>Total Price</th>
+                            <th>Ordered Date</th>
+                            <th>Order Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in items %}
+                            <tr>
+                                <td>{{ order.code }}</td>
+                                <td>
+                                    <ul>
+                                        {% for item in order.items.all %}
+                                            <li>
+                                                {{ item.product_name }} — {{ item.quantity }} <b>Kg </b> x <b>AED</b> {{ item.price_at_purchase }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <b>AED</b> {{ order.total_price|floatformat:2 }}
+                                </td>
+                                <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>{{ order.status|upper }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info mt-4">You have not placed any orders yet.</div>
+        {% endif %}
+    </div>
+{% endblock content %}
