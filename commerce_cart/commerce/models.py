@@ -15,6 +15,8 @@ class Product(AbstractBaseModel):
 
     quantity = models.PositiveIntegerField(verbose_name=_("Quantity"), default=1)
 
+    image = models.ImageField(verbose_name=_("Image"), upload_to="product_images")
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
@@ -27,7 +29,7 @@ class Product(AbstractBaseModel):
         self.save()
 
     def __str__(self) -> str:
-        return f"{self.name} (${self.price})"
+        return f"{self.name} (AED {self.price})"
 
 
 class Cart(AbstractBaseModel):
