@@ -24,11 +24,11 @@
 
         document.getElementById(
           `line-total-${productId}`
-        ).innerText = `$${lineTotal}`;
+        ).innerText = `AED ${lineTotal}`;
         total += parseFloat(lineTotal);
       });
 
-      document.getElementById("grand-total").innerText = `$${total.toFixed(2)}`;
+      document.getElementById("grand-total").innerText = `AED ${total.toFixed(2)}`;
     }
 
     qtyInputs.forEach((input) => {
