@@ -9,6 +9,13 @@
         {% for product in products %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}"
+                             class="card-img-top"
+                             alt="{{ product.name }}"
+                             height="200px"
+                             width="100%" />
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">
@@ -21,7 +28,6 @@
                                     class="add__to__cart__btn btn btn-primary"
                                     data-product-id="{{ product.id }}">
                                 <span class="btn-text">Add to Cart</span>
-                                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                             </button>
                         </form>
                     </div>
