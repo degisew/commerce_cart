@@ -13,9 +13,11 @@
                         <p class="card-text">
                             <b>AED</b> {{ product.price }} / <b>Kg</b>
                         </p>
-                        <form method="post" action="#">
+                        <form method="post" action="{% url 'add_to_cart' %}">
                             {% csrf_token %}
-                            <button class="btn btn-primary disabled">Add to Cart</button>
+                            <input type="hidden" name="product_id" value="{{ product.id }}" />
+                            <button class="add__to__cart__btn btn btn-primary"
+                                    data-product-id="{{ product.id }}">Add to Cart</button>
                         </form>
                     </div>
                 </div>

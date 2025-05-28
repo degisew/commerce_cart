@@ -70,6 +70,24 @@ class CartView(View):
         return redirect("cart")
 
 
+class AddToCartView(View):
+    def post(self, request):
+        product_id = request.POST.get("product_id")
+        if not product_id:
+            messages.error(request, "Invalid product id.")
+            return redirect("home")
+        try:
+            Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            messages.error(request, "Product not found.")
+            return redirect("home")
+
+        cart = CartMixin(request)
+        cart.add(product_id, quantity=1)
+        messages.success(request, "success")
+        return redirect("home")
+
+
 class OrderView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
         session_key = request.session.session_key
