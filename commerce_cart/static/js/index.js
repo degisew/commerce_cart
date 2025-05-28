@@ -39,49 +39,81 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Add to cart
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".add__to__cart__btn");
+document.addEventListener("DOMContentLoaded", function () {
+  const forms = document.querySelectorAll(".add-to-cart-form");
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const productId = btn.dataset.productId;
-      const csrfToken = document.querySelector(
-        "[name=csrfmiddlewaretoken]"
-      ).value;
+  forms.forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-      try {
-        const response = await fetch("/add-to-cart/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": csrfToken,
-          },
-          body: new URLSearchParams({ product_id: productId }),
+      const productId = this.dataset.productId;
+      const url = this.dataset.url;
+      const button = this.querySelector(".add__to__cart__btn");
+      const btnText = button.querySelector(".btn-text");
+      const spinner = button.querySelector(".spinner-border");
+
+      const csrfToken = this.querySelector("[name=csrfmiddlewaretoken]").value;
+
+      const formData = new FormData();
+      formData.append("product_id", productId);
+      formData.append("csrfmiddlewaretoken", csrfToken);
+
+      // AJAX request
+      fetch("/commerce/add-to-cart/", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": csrfToken,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            showToast("Success!", data.message, "success");
+          } else {
+            showToast("Error!", data.message, "error");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+
+          showToast(
+            "Error!",
+            "Something went wrong. Please try again.",
+            "error"
+          );
         });
-
-        const data = await response.json();
-
-        if (data.success) {
-          btn.textContent = "Item Added.";
-          btn.disabled = true;
-
-          showToast(data.message || "Added to cart");
-        } else {
-          showToast(data.error || "Failed to add", true);
-        }
-      } catch (err) {
-        showToast("Network error", true);
-      }
     });
   });
-
-  function showToast(msg, isError = false) {
-    const toast = document.createElement("div");
-    toast.textContent = msg;
-    toast.className = `toast ${isError ? "error" : "success"}`;
-    document.body.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 3000);
-  }
 });
+
+// Toast notification
+function showToast(title, message, type = "success") {
+  const toastContainer = document.getElementById("toast-container");
+  const toastId = "toast-" + Date.now();
+
+  const bgClass = type === "success" ? "bg-success" : "bg-danger";
+
+  const toastHTML = `
+        <div class="toast align-items-center text-white ${bgClass} border-0" id="${toastId}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <strong>${title}</strong><br>
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `;
+
+  toastContainer.insertAdjacentHTML("beforeend", toastHTML);
+
+  const toastElement = document.getElementById(toastId);
+  const toast = new bootstrap.Toast(toastElement);
+  toast.show();
+
+  toastElement.addEventListener("hidden.bs.toast", function () {
+    this.remove();
+  });
+}

@@ -4,6 +4,7 @@
 {% endblock title %}
 {% block content %}
     <h2>List of Available Products</h2>
+    <div class="toast-container" id="toast-container"></div>
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 mb-4">
@@ -13,11 +14,15 @@
                         <p class="card-text">
                             <b>AED</b> {{ product.price }} / <b>Kg</b>
                         </p>
-                        <form method="post" action="{% url 'add_to_cart' %}">
+                        <form class="add-to-cart-form" data-product-id="{{ product.id }}">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}" />
-                            <button class="add__to__cart__btn btn btn-primary"
-                                    data-product-id="{{ product.id }}">Add to Cart</button>
+                            <button type="submit"
+                                    class="add__to__cart__btn btn btn-primary"
+                                    data-product-id="{{ product.id }}">
+                                <span class="btn-text">Add to Cart</span>
+                                <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                            </button>
                         </form>
                     </div>
                 </div>

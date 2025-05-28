@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views.generic import TemplateView
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
 from commerce_cart.commerce.models import Order, Product
 from commerce_cart.commerce.services import OrderService
 from commerce_cart.commerce.utils import CartMixin
@@ -71,21 +71,31 @@ class CartView(View):
 
 
 class AddToCartView(View):
-    def post(self, request):
-        product_id = request.POST.get("product_id")
-        if not product_id:
-            messages.error(request, "Invalid product id.")
-            return redirect("home")
-        try:
-            Product.objects.get(id=product_id)
-        except Product.DoesNotExist:
-            messages.error(request, "Product not found.")
-            return redirect("home")
-
+    def post(self, request: HttpRequest) -> JsonResponse:
         cart = CartMixin(request)
-        cart.add(product_id, quantity=1)
-        messages.success(request, "success")
-        return redirect("home")
+        product_id = request.POST.get("product_id")
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            try:
+                product = Product.objects.get(id=product_id)
+                cart.add(product.id, quantity=1)
+                return JsonResponse(
+                    {
+                        "success": True,
+                        "message": f"{product.name} added to cart.",
+                        "product_name": product.name,
+                    }
+                )
+            except Product.DoesNotExist:
+                return JsonResponse({"success": False, "message": "Product not found."})
+            except Exception:
+                return JsonResponse(
+                    {
+                        "success": False,
+                        "message": "Something went wrong. Please try again.",
+                    }
+                )
+        else:
+            return JsonResponse({"success": False, "message": "Invalid request."})
 
 
 class OrderView(View):
