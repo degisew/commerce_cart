@@ -1,64 +1,65 @@
-{% extends "_base.html" %} {% load static %} {% block content %}
-<div class="container mt-5">
-  <h2 class="mb-4">Cart Details</h2>
-  {% if messages %} {% for message in messages %}
-  <div
-    class="alert alert-{{ message.tags }} alert-dismissible fade show auto-dismiss-alert"
-    role="alert"
-  >
-    {{ message }}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
-  </div>
-  {% endfor %} {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped align-middle">
-        <thead class="table-dark">
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Line Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in cart_items %}
-          <tr>
-            <td>{{ item.product.name }}</td>
-            <td><b>AED</b> {{ item.product.price }}</td>
-            <td style="width: 100px">
-              <input
-                type="number"
-                name="quantity_{{ item.product.id }}"
-                value="{{ item.quantity }}"
-                class="form-control quantity-input"
-                min="1"
-                data-product-id="{{ item.product.id }}"
-                data-price="{{ item.product.price }}"
-              />
-            </td>
-            <td id="line-total-{{ item.product.id }}">
-              <b>AED</b> {{ item.total_price }}
-            </td>
-          </tr>
-          {% endfor %}
-          <tr>
-            <td colspan="3" class="text-end"><strong>Total</strong></td>
-            <td><strong id="grand-total">${{ total }}</strong></td>
-          </tr>
-        </tbody>
-      </table>
+{% extends "_base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Cart Details</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show auto-dismiss-alert"
+                     role="alert">
+                    {{ message }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Line Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>
+                                    <b>AED</b> {{ item.product.price }}
+                                </td>
+                                <td class="qty__input__td">
+                                    <input type="number"
+                                           name="quantity_{{ item.product.id }}"
+                                           value="{{ item.quantity }}"
+                                           class="form-control quantity-input"
+                                           min="1"
+                                           data-product-id="{{ item.product.id }}"
+                                           data-price="{{ item.product.price }}" />
+                                </td>
+                                <td id="line-total-{{ item.product.id }}">AED {{ item.total_price }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3" class="text-end">
+                                <strong>Total</strong>
+                            </td>
+                            <td>
+                                <strong id="grand-total">AED {{ total }}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">Buy</button>
+            </div>
+        </form>
     </div>
-
-    <div class="d-flex justify-content-end">
-      <button type="submit" class="btn btn-success">Buy</button>
-    </div>
-  </form>
-</div>
-{% endblock %}
+{% endblock content %}

@@ -1,23 +1,25 @@
 {% extends "_base.html" %}
-{% block title %}Products{% endblock %}
+{% block title %}
+    Products
+{% endblock title %}
 {% block content %}
-
-<h2>List of Available Products</h2>
-<div class="row">
-  {% for product in products %}
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text"><b>AED</b> {{ product.price }} / <b>Kg</b></p>
-          <form method="post" action="#">
-            {% csrf_token %}
-            <button class="btn btn-primary disabled">Add to Cart</button>
-          </form>
-        </div>
-      </div>
+    <h2>List of Available Products</h2>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">
+                            <b>AED</b> {{ product.price }} / <b>Kg</b>
+                        </p>
+                        <form method="post" action="#">
+                            {% csrf_token %}
+                            <button class="btn btn-primary disabled">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-  {% endfor %}
-</div>
-
-{% endblock %}
+{% endblock content %}
